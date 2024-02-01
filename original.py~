@@ -1,0 +1,49 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import timevarying
+
+
+"""
+データの読み込みと処理
+"""
+fig, axes = plt.subplots(nrows = 33, ncols = 1, figsize=(6,100), sharex=True, sharey=True)
+
+def plot_original_data(data, n_time):
+    for i, ax in enumerate(axes):
+        plt.grid()
+        time = np.arange(0.0, n_time / 100 ,0.01)
+        ax.plot(time, data[i,:], linestyle='-')
+        ax.legend()
+        ax.set_title(f'Joint {i+1}', fontsize = 20, x=0.85, y= 0.85,  ha="right", va="top")
+    plt.show()
+
+tau_t = np.loadtxt("nlopt/Aug--7-17-21-37-2023-motion.taulist")
+pos_t = np.loadtxt("nlopt/Aug--7-17-21-37-2023-motion.avlist")
+
+"""
+241 * 33 ⇨　33 * 241
+"""
+
+tau = np.delete(tau_t, 0, axis=1)
+pos = np.delete(pos_t, 0, axis=1)
+
+tau = tau.T
+pos = pos.T
+# これ転置したあとjointの順番はあっているのか？
+
+n_dof = tau.shape[0] # 33
+n_time = tau.shape[1] # 241
+
+"""
+joint number
+1 |--------| 
+2 |        |
+3 |        |
+4 |--------|
+"""
+
+plot_original_data(tau,n_time)
+
+# synergy_instance = timevarying.Synergy()
+
+# synergy_instance.plot_original_data(tau, n_time)
