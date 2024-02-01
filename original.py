@@ -35,3 +35,4 @@ synergy_instance = timevarying.Synergy(n_dof, n_time, n_synergies=3)
 synergies, amplitude, delays, data_reconstruct = synergy_instance.initialize_data()
 
 r2 =  synergy_instance.update_synergy(tau, data_reconstruct,synergies, amplitude, delays, data_reconstruct)
+
