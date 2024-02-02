@@ -31,13 +31,21 @@ class Synergy():
         """
 
         # diff tau - tau(reconstruct)
-        
+
+        # (1)式の実装
         for i in range(self.n_synergies):
-            data_reconstruct += amplitude[i,0] * synergies[i,:,:] * delays[i,0]
+            data_reconstruct += amplitude[i,0] * synergies[i,:,:] * delays[i,0] 
 
         # 型を揃えれば、このように行列を足し合わせることができる。
         # (n_dof行[Nm], n_time列)
 
+        # (2)式の実装
         diff = data - data_reconstruct
+        error = np.sum(np.square(diff)) # 行列の各要素の二乗和
 
-        
+        # minimizing error by iterating
+        """
+        step1 ... find the delays using matching procedure based on the cross
+        step2 ... update amplitude by gradient desent
+        step3 ... update synergy by gradinet descent
+        """
