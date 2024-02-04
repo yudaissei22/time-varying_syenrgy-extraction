@@ -5,7 +5,6 @@ class Synergy():
     def __init__(self, n_dof, n_time, n_synergies):
         self.n_dof = n_dof
         self.n_time = n_time
-
         self.n_synergies = n_synergies
 
     def initialize_data(self):
@@ -22,7 +21,6 @@ class Synergy():
             time = np.arange(0.0, self.n_time / 100 ,0.01)
             ax.plot(time, data[i,:])
         plt.show()
-
         
     def update_synergy(self, data, data_reconstruct, synergies, amplitude, delays, mu = 0.001):
         """
@@ -44,8 +42,18 @@ class Synergy():
         error = np.sum(np.square(diff)) # 行列の各要素の二乗和
 
         # minimizing error by iterating
+
         """
         step1 ... find the delays using matching procedure based on the cross
         step2 ... update amplitude by gradient desent
         step3 ... update synergy by gradinet descent
         """
+       
+    def match_synergy(self, data):
+        """
+        Update amplitude and delays by using matching pursuit.
+        This algorithm is based on [d'Avella and Tresch, 2002].
+        """
+        
+        
+        
